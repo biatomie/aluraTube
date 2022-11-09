@@ -45,7 +45,7 @@ export default function Search({ valorDoFiltro, setValorDoFiltro }) {
     //const valorDaBusca = React.useState("Frost")[1]; //valor da função que pede pro React recarregar a página bounddispatchsetspace const [valorDaBusca, setValorDaBusca] = React.useState("Frost");
     //console.log("Search", valorDaBusca)
     //const [valorDaBusca, setValorDaBusca] = React.useState("olá"); na aula 2 isto foi para o index da homepage
-    console.log("Search", valorDaBusca)
+    //console.log("Search", valorDaBusca)
     const valorDaBusca = valorDoFiltro; //trocou o nome para fazer sentido dentro do componente
     const setValorDaBusca = setValorDoFiltro;
 //setValordaBusca fica rerenderizando a pagina

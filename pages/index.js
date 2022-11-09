@@ -8,7 +8,7 @@ import { StyledTimeline } from "../src/components/Timeline";
 function HomePage() {
     // const mensagem = "Bem vindo ao AluraTube!"
     // const estilosDaHomePage = {backgroundColor:"red"}
-    const [valorDoFiltro, setValorDoFiltro] = React.useState("Angular"); //veio do index do menu
+    const [valorDoFiltro, setValorDoFiltro] = React.useState(""); //veio do index do menu
     //const valorDoFiltro = "Flutter";
 
     // console.log(config.playlists);
@@ -56,17 +56,21 @@ function HomePage() {
     }
     .user-info {
         display: flex;
-        margin-top: 50px;
         align-items: center;
         width: 100%;
         padding: 16px 32px;
         gap: 16px;
     }
   `;
+  const StyledBanner = styled.div`
+    background-image: url(${({ bg }) => bg});
+    /* background-image: url(${config.bg}); */
+    height: 230px;
+    `;
   function Header() {
     return (
         <StyledHeader>
-                {/* <img src={`../src/img/coffee.jpg`} /> */}
+            <StyledBanner bg={config.bg}/>
             <section className="user-info">
                 <img src={`https://github.com/${config.github}.png`} />
                 <div>
@@ -95,8 +99,9 @@ function HomePage() {
                 console.log(playlistName);
                 console.log(videos);
                 // return playlistNames;
+                //key otimiza o map ao informar a key
                 return (
-                    <section>
+                    <section key={playlistName}>
                             <h2>{playlistName}</h2>
                             <div>
                                 {videos
@@ -106,7 +111,7 @@ function HomePage() {
                                     return titleNormalized.includes(searchValueNormalized)})
                                 .map((video) => {
                                     return (
-                                        <a href={video.url}>
+                                        <a key={video.url} href={video.url}> 
                                             <img src={video.thumb} />
                                             <span>
                                                 {video.title}
