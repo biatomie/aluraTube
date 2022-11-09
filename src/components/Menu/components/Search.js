@@ -38,16 +38,25 @@ const StyledSearch = styled.div`
 // Menu
 // Search
 // Informação sempre desce
-
 export default function Search({ valorDoFiltro, setValorDoFiltro }) {
-    // const [valorDaBusca, setValorDaBusca] = React.useState("Teste");
-    // console.log("Search", valorDaBusca)
-    const valorDaBusca = valorDoFiltro;
-    const setValorDaBusca = setValorDoFiltro;
 
+//export default function Search({ valorDoFiltro, setValorDoFiltro }) {
+    //const valorDaBusca = React.useState("Frost")[0]; //valor da busca
+    //const valorDaBusca = React.useState("Frost")[1]; //valor da função que pede pro React recarregar a página bounddispatchsetspace const [valorDaBusca, setValorDaBusca] = React.useState("Frost");
+    //console.log("Search", valorDaBusca)
+    //const [valorDaBusca, setValorDaBusca] = React.useState("olá"); na aula 2 isto foi para o index da homepage
+    console.log("Search", valorDaBusca)
+    const valorDaBusca = valorDoFiltro; //trocou o nome para fazer sentido dentro do componente
+    const setValorDaBusca = setValorDoFiltro;
+//setValordaBusca fica rerenderizando a pagina
     return (
         <StyledSearch>
-            <input type="text" onChange={(e) => setValorDaBusca(e.target.value)} value={valorDaBusca} />
+            {/* {valorDaBusca}   */}
+            {/* <input type ="text" onChange={(infosDoEvento) => {
+                console.log("Digitou algo")
+                setValorDaBusca(infosDoEvento.target.value) //mostra os valores digitados = rerenderiza os blocos de html, infosDoEvento = e
+            }} /> */}
+            <input type="text" onChange={(e) => setValorDaBusca(e.target.value)} value={valorDaBusca} />            
             <button>
                 🔎
             </button>

@@ -1,3 +1,4 @@
+import React from "react"; //cria os estados
 import config from "../config.json";
 import styled from "styled-components";
 import { CSSReset } from "../src/components/CSSReset";
@@ -7,6 +8,8 @@ import { StyledTimeline } from "../src/components/Timeline";
 function HomePage() {
     // const mensagem = "Bem vindo ao AluraTube!"
     // const estilosDaHomePage = {backgroundColor:"red"}
+    const [valorDoFiltro, setValorDoFiltro] = React.useState("Angular"); //veio do index do menu
+    //const valorDoFiltro = "Flutter";
 
     // console.log(config.playlists);
 
@@ -19,9 +22,10 @@ function HomePage() {
                 flex: 1,
                 // backgroundColor: "red",
             }}>
-                <Menu />
+                {/* Prop Drilling */}
+                <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
                 <Header />
-                <Timeline playlists={config.playlists}>
+                <Timeline searchValue = {valorDoFiltro} playlists={config.playlists}>
                     Conteúdo
                 </Timeline>
             </div>
@@ -78,7 +82,7 @@ function HomePage() {
     )
   }
 
-  function Timeline(props) {
+  function Timeline({searchValue, ...props}) {
     // console.log("Dentro do componente", props);
     const playlistNames = Object.keys(props.playlists);
     //Statement
@@ -95,7 +99,12 @@ function HomePage() {
                     <section>
                             <h2>{playlistName}</h2>
                             <div>
-                                {videos.map((video) => {
+                                {videos
+                                .filter((video) => {
+                                    const titleNormalized = video.title.toLowerCase();
+                                    const searchValueNormalized = searchValue.toLowerCase();
+                                    return titleNormalized.includes(searchValueNormalized)})
+                                .map((video) => {
                                     return (
                                         <a href={video.url}>
                                             <img src={video.thumb} />
