@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CSSReset } from "../src/components/CSSReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
+import { StyledFavorites } from "../src/components/Favorites"
 
 function HomePage() {
     // const mensagem = "Bem vindo ao AluraTube!"
@@ -28,6 +29,7 @@ function HomePage() {
                 <Timeline searchValue = {valorDoFiltro} playlists={config.playlists}>
                     Conteúdo
                 </Timeline>
+                <Favorites favs={config.favorites}/>
             </div>
         </>
         // <div style={estilosDaHomePage}>
@@ -80,6 +82,7 @@ function HomePage() {
                     <p>
                         {config.job}
                     </p>
+                    
                 </div>
             </section>
         </StyledHeader>
@@ -129,3 +132,38 @@ function HomePage() {
         </StyledTimeline>
     )
   }
+
+  function Favorites(props) {
+    const favorites = Object.keys(props.favs);
+    return (
+        <StyledFavorites>
+        <div>
+            {favorites.map((favoritesUser)=>{
+                const favUsers = props.favs[favoritesUser];
+                console.log(favoritesUser);
+                return (
+                    <section>
+                            <h2>{favoritesUser}</h2>
+                            <div>
+                                {favUsers
+                                .map((fav) => {
+                                    return (
+                                        <a key={fav.git} href={fav.git}> 
+                                            <img src={fav.img} />
+                                            <span>
+                                                {fav.name}
+                                            </span>
+                                        </a>
+                                    )
+                                })}
+                            </div>
+
+                    </section>
+                )
+            })}
+        </div>
+
+        </StyledFavorites>
+    )
+ }
+  
