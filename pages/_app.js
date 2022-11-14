@@ -36,7 +36,7 @@ function ProviderWrapper(props) { //corrigir ordem do contexto e do color mode p
 
 function Root({ Component, pageProps }) {
   const contexto = React.useContext(ColorModeContext);
-  console.log(contexto.mode)
+  //console.log(contexto.mode)
   //const themeActive = {
   //  backgroundLevel1: "antiquewhite"
   //};

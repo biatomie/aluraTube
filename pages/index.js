@@ -5,14 +5,35 @@ import { CSSReset } from "../src/components/CSSReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
 import { StyledFavorites } from "../src/components/Favorites"
+import { videoService } from "../src/services/videoService";
 
 function HomePage() {
+    const service = videoService();
     // const mensagem = "Bem vindo ao AluraTube!"
     // const estilosDaHomePage = {backgroundColor:"red"}
     const [valorDoFiltro, setValorDoFiltro] = React.useState(""); //veio do index do menu
     //const valorDoFiltro = "Flutter";
-
+    const [playlists, setPlaylists] = React.useState({});  //config.playlists
     // console.log(config.playlists);
+    React.useEffect(() => {
+        //console.log("useEffect");
+        service
+            .getAllVideos()
+            .then((dados) => {
+                //console.log(dados.data);
+                // Forma imutavel
+                const novasPlaylists = {};
+                dados.data.forEach((video) => {
+                    if (!novasPlaylists[video.playlist]) novasPlaylists[video.playlist] = [];
+                    novasPlaylists[video.playlist] = [
+                        video,
+                        ...novasPlaylists[video.playlist],
+                    ];
+                });
+
+                setPlaylists(novasPlaylists);
+            });
+    }, []);//[] executa 1x
 
     return (
         <>
@@ -26,7 +47,9 @@ function HomePage() {
                 {/* Prop Drilling */}
                 <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
                 <Header />
-                <Timeline searchValue = {valorDoFiltro} playlists={config.playlists}>
+                
+                {/* <Timeline searchValue = {valorDoFiltro} playlists={config.playlists}> */}
+                <Timeline searchValue={valorDoFiltro} playlists={playlists}>
                     Conteúdo
                 </Timeline>
                 <Favorites favs={config.favorites}/>
@@ -100,8 +123,8 @@ function HomePage() {
         <div>
             {playlistNames.map((playlistName)=>{
                 const videos = props.playlists[playlistName];
-                console.log(playlistName);
-                console.log(videos);
+                //console.log(playlistName);
+                //console.log(videos);
                 // return playlistNames;
                 //key otimiza o map ao informar a key
                 return (
@@ -141,7 +164,7 @@ function HomePage() {
         <div>
             {favorites.map((favoritesUser)=>{
                 const favUsers = props.favs[favoritesUser];
-                console.log(favoritesUser);
+                //console.log(favoritesUser);
                 return (
                     <section>
                             <h2>{favoritesUser}</h2>
