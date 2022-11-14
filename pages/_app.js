@@ -1,57 +1,67 @@
-// import React from "react";
-// import { ThemeProvider } from "styled-components";
-// import { CSSReset } from "../src/components/CSSReset";
-// import ColorModeProvider, { ColorModeContext } from "../src/components/Menu/components/ColorMode";
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { CSSReset } from "../src/components/CSSReset";
+import ColorModeProvider, { ColorModeContext } from "../src/components/Menu/components/ColorMode";
+import RegisterVideo from "../src/components/RegisterVideo";
 
-// const theme = {
-//     light: {
-//         backgroundBase: "#f9f9f9",
-//         backgroundLevel1: "#ffffff",
-//         backgroundLevel2: "#f0f0f0",
-//         borderBase: "#e5e5e5",
-//         textColorBase: "#222222",
-//     },
-//     dark: {
-//         backgroundBase: "#181818",
-//         backgroundLevel1: "#202020",
-//         backgroundLevel2: "#313131",
-//         borderBase: "#383838",
-//         textColorBase: "#FFFFFF",
-//     }
-// };
+const theme = {
+    light: {
+      backgroundBase: "#F1D9A7",
+      backgroundLevel1: "#EEA243",
+      backgroundLevel2: "#F3D34A",
+      borderBase: "#EEA243",
+      textColorBase: "#495159"
+    },
+    dark: {
+      backgroundBase: "#181818",
+      backgroundLevel1: "#202020",
+      backgroundLevel2: "#313131",
+      borderBase: "#383838",
+      textColorBase: "#FFFFFF"
+    }
+}
 
 // _app.js -> Definições globais do NextJS
-// ThemeProvider -> Prover o tema para a app toda
-// ColorModeProvider -> Prove o state de light ou dark mode para todo mundo 
+// ThemeProvider > Prover o tema para a app toda
+//ColorModeProvider -> Prove o state de light ou dark mode para todo mundo
 
-// function ProviderWrapper(props) {
-//     return (
-//         <ColorModeProvider initialMode={"dark"}>
-//             {props.children}
-//         </ColorModeProvider>
-//     )
-// }
 
-// function MyApp({ Component, pageProps }) {
-//     const contexto = React.useContext(ColorModeContext);
-//     console.log(contexto.mode);
-//     return (
-//         <ThemeProvider theme={theme[contexto.mode]}>
-//             <CSSReset />
-//             <Component {...pageProps} />
-//         </ThemeProvider>
-//     )
-// }
-
-// export default function _App(props) {
-//     return (
-//         <ProviderWrapper>
-//             <MyApp {...props} />
-//         </ProviderWrapper>
-//     )
-// }; 
-
-export default function MyApp({ Component, pageProps }) {
-  console.log("Oie")
-  return <Component {...pageProps} />
+function ProviderWrapper(props) { //corrigir ordem do contexto e do color mode provider
+  return (
+    <ColorModeProvider initialMode={"light"}>
+      {props.children}
+    </ColorModeProvider>
+  )
 }
+
+function Root({ Component, pageProps }) {
+  const contexto = React.useContext(ColorModeContext);
+  console.log(contexto.mode)
+  //const themeActive = {
+  //  backgroundLevel1: "antiquewhite"
+  //};
+
+  return(
+    <ThemeProvider theme={theme[contexto.mode]}>     
+      <CSSReset />
+      <Component {...pageProps} />
+      <RegisterVideo />
+    </ThemeProvider>
+    //<ColorModeProvider initialMode={'dark'}>
+      //{/* <ThemeProvider theme={themeActive}>      */}
+      //{/* <ThemeProvider theme={theme.light}>      */}
+ 
+    //</ ColorModeProvider>
+
+  )
+}
+
+
+
+export default function _App(props) {//forçar uma ordem
+  return (
+    <ProviderWrapper>
+      <Root {...props}/>
+    </ProviderWrapper>
+  )
+};

@@ -11,3 +11,8 @@ Imersao React 2022
 👋 My Name is Bianca <br>
 🎨This project is a youtube-style page with watercolor videos <br>
 👩‍💻This page was made in React at Immersion Alura 5 - 2022
+
+## Como está o nosso projeto?
+- `_app.js`: Carrega o setup base do projeto
+    Aqui vão ficar  os Providers de informação do nosso projeto
+    -CSSReset
