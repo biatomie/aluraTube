@@ -111,7 +111,8 @@ export default function RegisterVideo() {
                                 <button type="submit">
                                     Cadastrar
                                 </button>
-                                <label>Thumb:</label>
+                                <br><label>Thumb:</label></br>
+                                
 
                                     {<img src={getThumbnail(formCadastro.values.url)}/>}
                                     
