@@ -47,6 +47,7 @@ export default function RegisterVideo() {
         
         
     const [formVisivel, setFormVisivel] = React.useState(false);
+    //const [image, setImage] = useState('');
     
     //TODO:[x] Falta o botão
     //TODO:[x] Modal
@@ -110,8 +111,9 @@ export default function RegisterVideo() {
                                 <button type="submit">
                                     Cadastrar
                                 </button>
+                                <label>Thumb:</label>
 
-                                    {/* <img src={`https://img.youtube.com/vi/QOLeInFts2Y/hqdefault.jpg`} /> */}
+                                    {<img src={getThumbnail(formCadastro.values.url)}/>}
                                     
 
                             </div>
