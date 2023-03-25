@@ -70,12 +70,14 @@ export default function RegisterVideo() {
                                 evento.preventDefault();
                                 console.log(formCadastro.values);
 
+        
+
                                 // Contrato entre o nosso Front e o BackEnd
                                 supabase.from("video").insert({
                                     title: formCadastro.values.titulo,
                                     url: formCadastro.values.url,
                                     thumb: getThumbnail(formCadastro.values.url),
-                                    playlist: "Arte Digital",
+                                    playlist: play,
                                 })
                                 .then((oqueveio) => {
                                     console.log(oqueveio);
@@ -108,6 +110,11 @@ export default function RegisterVideo() {
                                     name="url"
                                     value={formCadastro.values.url}
                                     onChange={formCadastro.handleChange} />
+                                <select id="play" name="Playlists">
+                                    <option value="Aquarela">Aquarela</option>
+                                    <option value="Desenhos">Desenhos</option>
+                                    <option value="Arte Digital">Arte Digital</option>
+                                </select>
                                 <button type="submit">
                                     Cadastrar
                                 </button>
